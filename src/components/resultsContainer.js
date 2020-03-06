@@ -6,10 +6,13 @@ import SearchResult from "../components/searchResult";
 function SearchResults(props) {
     //Display for search page
     if(props.path === "/") {
+
         return(
             <div id="resultsContainer">
                 <h3>Results</h3>
+
                 {props.bookData.map((book) => {
+                    console.log(book)
                     const bookResult = book.volumeInfo;
                     return <SearchResult
                     title={bookResult.title}

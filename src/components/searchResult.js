@@ -13,7 +13,7 @@ class SearchResult extends React.Component {
         this.handleDeleteClick = this.handleDeleteClick.bind(this);
     }
 
-    handleSaveclick = function(e) {
+    handleSaveClick = function(e) {
         this.setState({saved: true});
         const bookData = {
             title: this.props.title,

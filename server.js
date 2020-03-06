@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require('mongoose');
 
@@ -12,7 +13,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-mongoose.connect("mongodb://localhost/googlebooks")
+const mongoURL = process.env.PROD_MONGODB || "mongodb://localhost/googlebooks"
+mongoose.connect(mongoURL, {useNewUrlParser: true})
     .then(() => {
         console.log("Connected to MongoDB");
     })
@@ -20,7 +22,7 @@ mongoose.connect("mongodb://localhost/googlebooks")
         console.log("error connecting to mongoDB")
     });
 
-
+require("./routes/api-routes")(app);
 
 app.listen(PORT, function() {
     console.log("Server listening on: http://localhost:" + PORT);

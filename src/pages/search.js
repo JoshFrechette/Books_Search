@@ -1,7 +1,6 @@
 import React from "react";
-import SearchInput from "../components/searchInput"
-import ResultsContainer from "../components/resultsContainer"
-// import API from "./utils/api";
+import SearchInput from "../components/searchInput";
+import ResultsContainer from "../components/resultsContainer";
 import Routes from "../utils/routes";
 
 class Search extends React.Component {
@@ -25,8 +24,9 @@ class Search extends React.Component {
         Routes.searchBooks(this.state.bookInput)
             .then(
                 (response) => {
+                    console.log(response)
                     this.setState({bookData: response.data});
-                   this.setState({bookInput:""});
+                    this.setState({bookInput:""});
                 }
             );
     }

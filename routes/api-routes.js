@@ -1,3 +1,4 @@
+require('dotenv').config()
 const axios = require("axios");
 const db = require("../models");
 const path = require("path");
@@ -5,8 +6,8 @@ const path = require("path");
 module.exports = function(app) {
     app.get("/api/books", (req, res) => {
         db.Book.find().then(
-            (booksData) => {
-                res.json(booksData);
+            (bookData) => {
+                res.json(bookData);
             }
         ).catch(
             (err) => {
@@ -15,8 +16,10 @@ module.exports = function(app) {
         );
     });
 
-    app.post("/search", (req, res) => {
+    app.post("/", (req, res) => {
+        console.log(req.body.title)
         let bookTitle = req.body.title.replace(/\s/g, "+");
+        console.log(bookTitle);
         axios.get(
             `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLEBOOKS_KEY}`
         ).then(
