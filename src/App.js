@@ -6,7 +6,7 @@ import Saved from "./pages/saved";
 import Header from "./components/header";
 import Nav from "./components/nav";
 
-class App extends Component() {
+class App extends Component {
   render() {
     return (
       <Router>

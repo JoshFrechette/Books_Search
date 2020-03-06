@@ -1,5 +1,5 @@
 import React from "react";
-import SearchResult from "./components/searchResults";
+import SearchResult from "../components/searchResult";
 
 
 //Use better to DRY 
@@ -11,12 +11,12 @@ function SearchResults(props) {
                 <h3>Results</h3>
                 {props.bookData.map((book) => {
                     const bookResult = book.volumeInfo;
-                    return <BookResponse
-                    title={bookInfo.title}
-                    authors={bookInfo.authors}
-                    description={bookInfo.description}
-                    link={bookInfo.canonicalVolumeLink}
-                    img={bookInfo.imageLinks}
+                    return <SearchResult
+                    title={bookResult.title}
+                    authors={bookResult.authors}
+                    description={bookResult.description}
+                    link={bookResult.canonicalVolumeLink}
+                    img={bookResult.imageLinks}
                     path={props.path}
                     key={book.id} />
 
@@ -31,12 +31,12 @@ function SearchResults(props) {
             <div id="resultsContainer">
                 <h3>Saved Books</h3>
                 {props.savedBooks.map((book) => {
-                return <BookResponse
-                    title={bookInfo.title}
-                    authors={bookInfo.authors}
-                    description={bookInfo.description}
-                    link={bookInfo.canonicalVolumeLink}
-                    img={bookInfo.imageLinks}
+                return <SearchResult
+                    title={book.title}
+                    authors={book.authors}
+                    description={book.description}
+                    link={book.canonicalVolumeLink}
+                    img={book.imageLinks}
                     path={props.path}
                     key={book.id} />
                 })}
@@ -54,4 +54,4 @@ function SearchResults(props) {
     }
 }
 
-export default Search
+export default SearchResults;

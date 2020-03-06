@@ -1,52 +1,82 @@
 import React from "react";
-import SearchResult from "./components/searchResults";
+import Routes from "../utils/routes";
+import { BrowserRouter as Router} from "react-router-dom";
 
-
-//Use better to DRY 
-function SearchResults(props) {
-    if(props.path === "/") {
-        return(
-            <div id="resultsContainer">
-                <h3>Results</h3>
-                {props.bookData.map((book) => {
-                    const bookResult = book.volumeInfo;
-                    return <BookResponse
-                    title={bookInfo.title}
-                    authors={bookInfo.authors}
-                    description={bookInfo.description}
-                    link={bookInfo.canonicalVolumeLink}
-                    img={bookInfo.imageLinks}
-                    path={props.path}
-                    key={book.id} />
-
-
-                })}
-            </div>
-        );
-    }  else if(props.path === "/saved") {
-        if(props.savedBooks.length > 0) {
-            return(
-            <div id="resultsContainer">
-                <h3>Saved Books</h3>
-                {props.savedBooks.map((book) => {
-                return <BookResponse
-                    title={bookInfo.title}
-                    authors={bookInfo.authors}
-                    description={bookInfo.description}
-                    link={bookInfo.canonicalVolumeLink}
-                    img={bookInfo.imageLinks}
-                    path={props.path}
-                    key={book.id} />
-                })}
-            </div>
-            );
-        } else {
-            return(
-                <div is="resultsContainer">
-                    <h3>Saved Books</h3>
-                    <p>No Saved Books!</p>
-                </div>
-            )
+class SearchResult extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            saved: false,
+            deleted: false
         }
+        this.handleSaveClick = this.handleSaveClick.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    }
+
+    handleSaveclick = function(e) {
+        this.setState({saved: true});
+        const bookData = {
+            title: this.props.title,
+            authors: this.props.authors,
+            link: this.props.link,
+            img: this.props.img,
+            description: this.props.description
+        
+        }
+        e.preventDefault();
+        Routes.addBookToDB(bookData).then(
+            (response) => {
+                console.log(response);
+            }
+        ).catch(
+            (err) => {
+                console.log(err);
+            }
+        );
+
+    }
+
+    handleDeleteClick(e) {
+        this.setState({deleted: true});
+        e.preventDefault();
+        Routes.deleteBook(this.props.id).then(
+            (response) => {
+                console.log(response);
+                Router.dispatch(this.props.location, null)
+            }
+        ).cath (
+            (err) => {
+                console.log(err);
+            }
+        )
+    }
+
+    render() {
+        return(
+            <div className="bookResult" id={(this.props.id)? this.props.id : null} style={{display: this.state.deleted? "none" : "block"}}>
+                <div className="row">
+                    <div className="oneBookInfo">
+                        <h5>{this.props.title}</h5>
+                        <p>By: {(this.props.authors)? this.props.authors.join("") : "N/A"}</p>
+                    </div>
+                    <div className="btn btn-books">
+                        {
+                            (this.props.link)? <a href={this.props.link} target="_blank" rel="noopener noreferrer"><button type="button" name="view">View</button></a> : null
+                        }
+                        {
+                            (this.props.path ==="/")? <button type="button" name="save" onClick={this.handleSaveClick} disabled={this.state.saved}>{(this.state.saved)? "Saved" : "Save"}</button> : <button type="button" name="delete" onClick={this.handleDeleteClick} disabled={this.state.deleted}>Delete</button>
+                        }
+                    </div>
+                </div>
+                <div className="row">
+                        {(this.props.img)? <img src= {
+                            this.props.img.thumbnail? this.props.img.thumbnail: ""
+                        } alt="Book Cover"/> : null}
+                    <p>{(this.props.description)? this.props.description: "N/A"}</p>
+                </div>
+            </div>
+        )
     }
 }
+
+export default SearchResult;

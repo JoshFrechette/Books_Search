@@ -1,7 +1,7 @@
 import React from "react";
-import Routes from "./utils/routes";
-import { render } from "@testing-library/react";
-import ResultsContainer from "./components/resultsContainer";
+import Routes from "../utils/routes";
+// import { render } from "@testing-library/react";
+import ResultsContainer from "../components/resultsContainer";
 
 class Saved extends React.Component {
     constructor(props) {
