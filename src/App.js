@@ -4,20 +4,23 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Search from "./pages/search";
 import Saved from "./pages/saved";
 import Header from "./components/header";
+import Nav from "./components/nav";
 
-
-function App() {
-  return (
-    <div className="App">
+class App extends Component() {
+  render() {
+    return (
       <Router>
-        <Header />
-        <Switch>
-          <Route path="/" component={Search}/>
-          <Route path="/saved" component={Saved}/>
-        </Switch>
+        <div className="App">
+          <Nav />
+          <Header />
+          <Switch>
+            <Route path="/" component={Search} />
+            <Route path="/saved" component={Saved} />
+          </Switch>
+        </div>
       </Router>
-    </div>
-  );
+    )
+  }
 }
 
 export default App;
