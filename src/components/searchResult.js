@@ -44,7 +44,7 @@ class SearchResult extends React.Component {
                 console.log(response);
                 Router.dispatch(this.props.location, null)
             }
-        ).cath (
+        ).catch (
             (err) => {
                 console.log(err);
             }
@@ -57,7 +57,7 @@ class SearchResult extends React.Component {
                 <div className="row">
                     <div className="oneBookInfo">
                         <h5>{this.props.title}</h5>
-                        <p>By: {(this.props.authors)? this.props.authors.join("") : "N/A"}</p>
+                        <p>By: {(this.props.authors)? this.props.authors.join(",") : "N/A"}</p>
                     </div>
                     <div className="btn btn-books">
                         {

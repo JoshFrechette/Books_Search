@@ -3,10 +3,9 @@ import SearchResult from "../components/searchResult";
 
 
 //Use better to DRY 
-function SearchResults(props) {
+function ResultsContainer(props) {
     //Display for search page
     if(props.path === "/") {
-
         return(
             <div id="resultsContainer">
                 <h3>Results</h3>
@@ -57,4 +56,4 @@ function SearchResults(props) {
     }
 }
 
-export default SearchResults;
+export default ResultsContainer;

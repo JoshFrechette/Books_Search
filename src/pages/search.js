@@ -24,8 +24,8 @@ class Search extends React.Component {
         Routes.searchBooks(this.state.bookInput)
             .then(
                 (response) => {
-                    console.log(response)
-                    this.setState({bookData: response.data});
+                    console.log(response.data.items)
+                    this.setState({bookData: response.data.items});
                     this.setState({bookInput:""});
                 }
             );

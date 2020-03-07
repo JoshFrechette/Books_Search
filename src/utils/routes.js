@@ -1,4 +1,7 @@
+
 import axios from "axios";
+require('dotenv').config();
+console.log(process.env.GOOGLEBOOKS_KEY)
 
 export default {
     getBooks: () => {
@@ -6,7 +9,7 @@ export default {
     },
     searchBooks: (title) => {
         console.log(title)
-        return axios.post("/", {title: title});
+        return axios.get( `https://www.googleapis.com/books/v1/volumes?q=${title}&key=AIzaSyAa-TGs32zTCTDbIWsLa6y9wcAW1-eVPvk`)
     },
     addBookToDB: (bookData) => {
         return axios.post("/api/books", bookData);

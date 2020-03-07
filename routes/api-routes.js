@@ -16,22 +16,22 @@ module.exports = function(app) {
         );
     });
 
-    app.post("/", (req, res) => {
-        console.log(req.body.title)
-        let bookTitle = req.body.title.replace(/\s/g, "+");
-        console.log(bookTitle);
-        axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLEBOOKS_KEY}`
-        ).then(
-            (response) => {
-                res.json(response.data.items)
-            }
-        ).catch(
-            (err) => {
-                res.json({error: error})
-            }
-        );
-    });
+    // app.get("/", (req, res) => {
+    //     console.log(req.body.title)
+    //     let bookTitle = req.body.title.replace(/\s/g, "+");
+    //     console.log(bookTitle);
+    //     axios.get(
+    //         `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLEBOOKS_KEY}`
+    //     ).then(
+    //         (response) => {
+    //             res.json(response.data.items)
+    //         }
+    //     ).catch(
+    //         (err) => {
+    //             res.json({error: error})
+    //         }
+    //     );
+    // });
 
     app.post("/api/books", (req, res) => {
         db.Book.create(req.body).then(
