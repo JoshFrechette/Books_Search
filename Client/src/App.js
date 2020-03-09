@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Search from "./pages/search";
 import Saved from "./pages/saved";
+import Test from "./pages/test";
 import Header from "./components/header";
 import Nav from "./components/nav";
 
@@ -14,8 +15,9 @@ class App extends Component {
           <Nav />
           <Header />
           <Switch>
-            <Route path="/" component={Search} />
-            <Route path="/saved" component={Saved} />
+          <Route path="/saved" component={Saved} />
+             <Route path="/" component={Search} />
+          
           </Switch>
         </div>
       </Router>

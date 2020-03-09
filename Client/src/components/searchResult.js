@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import Routes from "../utils/routes";
 import { BrowserRouter as Router} from "react-router-dom";
 
-class SearchResult extends React.Component {
+class SearchResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +19,7 @@ class SearchResult extends React.Component {
             title: this.props.title,
             authors: this.props.authors,
             link: this.props.link,
-            img: this.props.img,
+            img: this.props.img.thumbnail,
             description: this.props.description
         
         }
@@ -33,7 +33,6 @@ class SearchResult extends React.Component {
                 console.log(err);
             }
         );
-
     }
 
     handleDeleteClick(e) {

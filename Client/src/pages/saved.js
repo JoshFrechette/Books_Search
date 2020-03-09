@@ -1,19 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import Routes from "../utils/routes";
 // import { render } from "@testing-library/react";
 import ResultsContainer from "../components/resultsContainer";
 
-class Saved extends React.Component {
+class Saved extends Component {
     constructor(props) {
         super(props);
+        alert("etst")
+        console.log(props)
         this.state = {
             savedBooks: []
         }
     }
     //Replace with useEffect hook once overall app functions
-    componentWillMount() {
+    componentDidMount() {
+
+        console.log("did mount")
         Routes.getBooks().then(
             (response) => {
+                console.log(response)
                 this.setState({savedBooks: response.data});
             }
         ).catch(
@@ -25,7 +30,7 @@ class Saved extends React.Component {
     // Iterate saved book response
     render() {
         return(
-            <main>
+            <main> jutiujhiuyiuyuiyu
                 <ResultsContainer savedBooks={this.state.savedBooks} path={this.props.match.path} />
             </main>
         );

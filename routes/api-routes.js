@@ -1,12 +1,21 @@
 require('dotenv').config()
-const axios = require("axios");
+// const axios = require("axios");
 const db = require("../models");
 const path = require("path");
-
+const axios = require("axios");
 module.exports = function(app) {
+    app.get("/api/googlebooks/:title", (req, res) => {
+           let title = req.params.title;
+           console.log(title)
+           console.log(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.GOOGLEBOOKS_KEY}`)
+         axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.GOOGLEBOOKS_KEY}`).then(function(response){
+           console.log(response.data)    
+         
+         res.json(response.data);
+         })
+    })
     app.get("/api/books", (req, res) => {
-        db.Book.find().then(
-            (bookData) => {
+        db.Book.find({}).then(bookData => {
                 res.json(bookData);
             }
         ).catch(
@@ -17,11 +26,7 @@ module.exports = function(app) {
     });
 
     // app.get("/", (req, res) => {
-    //     console.log(req.body.title)
-    //     let bookTitle = req.body.title.replace(/\s/g, "+");
-    //     console.log(bookTitle);
-    //     axios.get(
-    //         `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&key=${process.env.GOOGLEBOOKS_KEY}`
+
     //     ).then(
     //         (response) => {
     //             res.json(response.data.items)
@@ -34,15 +39,15 @@ module.exports = function(app) {
     // });
 
     app.post("/api/books", (req, res) => {
-        db.Book.create(req.body).then(
-            (response) => {
-                res.json({successful: response});
-            }
-        ).catch(
-            (err) => {
-                res.json({error: err});
-            }
-        );
+        console.log(req.body)
+        db.Book
+        .create(req.body)
+        .then(dbBook => {
+            console.log(dbBook)
+            res.json(dbBook)})
+        .catch(err => {
+                res.json(err);
+        })
     });
 
     app.delete("/api/books/:id", (req, res) => {
@@ -55,9 +60,5 @@ module.exports = function(app) {
                 rres.json({error: err});
             }
         );
-    });
-
-    app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
     });
 }
