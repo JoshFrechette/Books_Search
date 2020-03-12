@@ -1,9 +1,9 @@
-import React from "react";
+import React , { Component } from "react";
 import SearchInput from "../components/searchInput";
 import ResultsContainer from "../components/resultsContainer";
 import Routes from "../utils/routes";
 
-class Search extends React.Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {

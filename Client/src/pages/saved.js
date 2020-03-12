@@ -6,20 +6,16 @@ import ResultsContainer from "../components/resultsContainer";
 class Saved extends Component {
     constructor(props) {
         super(props);
-        alert("etst")
-        console.log(props)
         this.state = {
             savedBooks: []
         }
     }
     //Replace with useEffect hook once overall app functions
     componentDidMount() {
-
-        console.log("did mount")
         Routes.getBooks().then(
             (response) => {
-                console.log(response)
-                this.setState({savedBooks: response.data});
+                console.log("getBooks :" , response.data)
+                this.setState({ savedBooks: response.data });
             }
         ).catch(
             (err) => {
@@ -29,8 +25,8 @@ class Saved extends Component {
     }
     // Iterate saved book response
     render() {
-        return(
-            <main> jutiujhiuyiuyuiyu
+        return (
+            <main>
                 <ResultsContainer savedBooks={this.state.savedBooks} path={this.props.match.path} />
             </main>
         );
