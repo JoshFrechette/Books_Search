@@ -2,36 +2,29 @@ import React, { Component } from "react";
 import Routes from "../utils/routes";
 // import { BrowserRouter as Router} from "react-router-dom";
 
-class SearchResult extends Component {
+class SavedResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            saved: false
+            deleted: false
         }
-        this.handleSaveClick = this.handleSaveClick.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
     }
 
-    handleSaveClick = function(e) {
-        this.setState({saved: true});
-        console.log("saveclick ", this.props)
-        const bookData = {
-            title: this.props.title,
-            authors: this.props.authors,
-            link: this.props.link,
-            img: this.props.img.thumbnail,
-            description: this.props.description
-        
-        }
+    handleDeleteClick(e) {
+        this.setState({deleted: true});
+        console.log("handle delete: ", this.props)
         e.preventDefault();
-        Routes.addBookToDB(bookData).then(
+        Routes.deleteBook(this.props.id).then(
             (response) => {
-                console.log(response);
+                console.log("delete here " ,response);
+                // Router.dispatch(this.props.location, null)
             }
-        ).catch(
+        ).catch (
             (err) => {
                 console.log(err);
             }
-        );
+        )
     }
 
     render() {
@@ -53,7 +46,7 @@ class SearchResult extends Component {
                 </div>
                 <div className="row">
                         {(this.props.img)? <img src= {
-                            this.props.img.thumbnail? this.props.img.thumbnail: ""
+                            this.props.img? this.props.img: ""
                         } alt="Book Cover"/> : null}
                     <p>{(this.props.description)? this.props.description: "N/A"}</p>
                 </div>
@@ -62,4 +55,4 @@ class SearchResult extends Component {
     }
 }
 
-export default SearchResult;
+export default SavedResult;

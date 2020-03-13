@@ -6,7 +6,6 @@ import ResultsContainer from "../components/resultsContainer";
 class Saved extends Component {
     constructor(props) {
         super(props);
-        alert("etst")
         console.log(props)
         this.state = {
             savedBooks: []
@@ -30,7 +29,7 @@ class Saved extends Component {
     // Iterate saved book response
     render() {
         return(
-            <main> jutiujhiuyiuyuiyu
+            <main> 
                 <ResultsContainer savedBooks={this.state.savedBooks} path={this.props.match.path} />
             </main>
         );
