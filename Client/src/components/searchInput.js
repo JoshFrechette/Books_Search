@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Colors } from 'react-foundation';
 
 function SearchInput(props) {
     return(
@@ -10,7 +11,7 @@ function SearchInput(props) {
             <form id="bookSearch">
                 <input type="text" name="bookInput" form="bookSearch" onChange={(e) => props.handleChange(e)} placeholder="Enter Book Title" required />
                 <br></br>
-                <button type="submit" onClick={(e) => props.handleSearchClick(e)}>Search</button>
+                <Button color={Colors.SUCCESS} type="submit" onClick={(e) => props.handleSearchClick(e)}>Search</Button>
             </form>
         </div>
     );

@@ -2,6 +2,7 @@ import React from "react";
 import SearchInput from "../components/searchInput";
 import ResultsContainer from "../components/resultsContainer";
 import Routes from "../utils/routes";
+import "../styles/saved.css";
 
 class Search extends React.Component {
     constructor(props) {
