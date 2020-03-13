@@ -1,5 +1,5 @@
 {
-  "name": "Books_Search",
+  "name": "books-search",
   "version": "1.0.0",
   "description": "Assignment for Lesson 21",
   "main": "server.js",
